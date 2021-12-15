@@ -23,7 +23,7 @@ class BookList extends Component {
 
   render() {
     return (
-      <div key="bl">
+      <div>
         <Navbar bg="light" expand="lg">
           <Container fluid className=" d-flex justify-content-between">
             <Navbar.Brand href="#">Scifi Books</Navbar.Brand>
@@ -61,7 +61,7 @@ class BookList extends Component {
                 return true
               })
               .map((book) => (
-                <Col xs={12} md={6} lg={3}>
+                <Col xs={12} md={6} lg={3} key={book.asin}>
                   <SingleBook book={book} />
                 </Col>
               ))}
