@@ -23,7 +23,7 @@ class BookList extends Component {
 
   render() {
     return (
-      <div>
+      <div key="bl">
         <Navbar bg="light" expand="lg">
           <Container fluid className=" d-flex justify-content-between">
             <Navbar.Brand href="#">Scifi Books</Navbar.Brand>
