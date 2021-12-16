@@ -1,4 +1,5 @@
 import ListGroup from "react-bootstrap/ListGroup"
+import DeleteComment from "./DeleteComment"
 import MyBadge from "./MyBadge"
 
 const SingleComment = (props) => {
@@ -9,6 +10,7 @@ const SingleComment = (props) => {
         message={props.comment.rate}
         color={ratingColor(props.comment.rate)}
       ></MyBadge>
+      <DeleteComment commentId={props.comment._id} />
     </ListGroup.Item>
   )
 }
