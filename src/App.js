@@ -8,10 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css"
 function App() {
   return (
     <div className="App">
-      <WarningSign message="Hey This is a Warning"></WarningSign>
+      <WarningSign message="Hey This is a Warning ☠ !!"></WarningSign>
 
       <h2>
-        <MyBadge color="warning" message="Scifi "></MyBadge>
+        <MyBadge color="warning" message="Scifi🔞 "></MyBadge>
       </h2>
 
       <BookList books={books} />
