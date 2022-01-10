@@ -7,14 +7,14 @@ class CommentsArea extends Component {
   state = {
     comments: [],
   }
-  componentDidMount = async () => {
+  reload = async () => {
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`,
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWJiMzBmM2NhMTZlYjAwMTU2Yzk3NmIiLCJpYXQiOjE2Mzk2NTc3MTUsImV4cCI6MTY0MDg2NzMxNX0.ZanleSqInFZNZuXonzL1Mu8KohG4YzKkfSTko2JwDfo",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWRjM2ZlM2YyNjM3ODAwMTVlNTBkMjMiLCJpYXQiOjE2NDE4MjQyMjgsImV4cCI6MTY0MzAzMzgyOH0.W742-ds5IzemTIVAKRB4zi1Cr6YVgn4vqAMwc42xblA",
           },
         }
       )
@@ -30,11 +30,15 @@ class CommentsArea extends Component {
     }
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.asin !== prevProps.asin) this.reload()
+  }
+
   render() {
     return (
       <div>
         <CommentList comments={this.state.comments}></CommentList>
-        <AddComment asin={this.props.asin} />
+        <AddComment fetchComments={this.reload} asin={this.props.asin} />
       </div>
     )
   }

@@ -4,27 +4,21 @@ import MyBadge from "./MyBadge"
 import CommentsArea from "./CommentArea"
 
 class SingleBook extends Component {
-  state = {
-    isSelected: false,
-  }
+  state = {}
   bookClass = () => {
     if (this.state.isSelected) {
       return "m-3 border-success"
     }
     return "m-3"
   }
-
-  toggleSelection = () => {
-    this.setState({
-      isSelected: !this.state.isSelected,
-    })
+  showComments = (asin) => {
+    this.props.setSelectedBook(asin)
   }
-
   render() {
     return (
       <Card className={this.bookClass()}>
         <Card.Img
-          onClick={() => this.toggleSelection()}
+          onClick={() => this.showComments(this.props.book.asin)}
           variant="top"
           src={this.props.book.img}
           style={{ height: 300, objectFit: "cover" }}
@@ -42,11 +36,6 @@ class SingleBook extends Component {
             {this.props.book.category}
           </Card.Text>
         </Card.Body>
-        {this.state.isSelected ? (
-          <CommentsArea asin={this.props.book.asin} />
-        ) : (
-          <div></div>
-        )}
       </Card>
     )
   }

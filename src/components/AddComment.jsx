@@ -37,7 +37,7 @@ class AddComment extends Component {
       )
       console.log(response)
       if (response.ok) {
-        let bookComments = await response.json()
+        this.props.fetchComments()
       } else {
         console.log(`something went wrong Don't Panic`)
       }
@@ -62,6 +62,7 @@ class AddComment extends Component {
           <div key="inline-radio" className="mb-3 d-inline">
             {["1", "2", "3", "4", "5"].map((rating) => (
               <Form.Check
+                key={`inline-radio-${rating}`}
                 inline
                 label={rating}
                 name="rating"

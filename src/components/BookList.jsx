@@ -9,15 +9,23 @@ import {
   Nav,
 } from "react-bootstrap"
 import SingleBook from "./SingleBook"
+import CommentsArea from "./CommentArea"
 
 class BookList extends Component {
   state = {
     filter: null,
+    selectedBook: null,
   }
 
   filterBookList = (query) => {
     this.setState({
       filter: query,
+    })
+  }
+  setSelectedBook = (asin) => {
+    this.setState({
+      filter: this.state.filter,
+      selectedBook: asin,
     })
   }
 
@@ -48,23 +56,37 @@ class BookList extends Component {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
         <Container>
-          <h2>The Scifi Collection</h2>
           <Row className="justify-content-center h-100">
-            {this.props.books
-              .filter((book) => {
-                if (this.state.filter != null) {
-                  return book.title
-                    .toLowerCase()
-                    .startsWith(this.state.filter.toLowerCase())
-                }
-                return true
-              })
-              .map((book) => (
-                <Col xs={12} md={6} lg={3} key={book.asin}>
-                  <SingleBook book={book} />
-                </Col>
-              ))}
+            <Col>
+              <h2>The Scifi Collection</h2>
+              <Row>
+                {this.props.books
+                  .filter((book) => {
+                    if (this.state.filter != null) {
+                      return book.title
+                        .toLowerCase()
+                        .startsWith(this.state.filter.toLowerCase())
+                    }
+                    return true
+                  })
+                  .map((book) => (
+                    <Col xs={12} md={6} lg={3} key={book.asin}>
+                      <SingleBook
+                        book={book}
+                        setSelectedBook={this.setSelectedBook}
+                      />
+                    </Col>
+                  ))}
+              </Row>
+            </Col>
+            <Col md={2}>
+              <h2>Comment Area</h2>
+              {this.state.selectedBook && (
+                <CommentsArea asin={this.state.selectedBook} />
+              )}
+            </Col>
           </Row>
         </Container>
       </div>
